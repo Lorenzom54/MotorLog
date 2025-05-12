@@ -1,0 +1,37 @@
+---
+const links = [
+    { href: "/", icon: "../../public/icons/home.svg", label: "Home" },
+    { href: "/vehicles", icon: "../../public/icons/car.svg", label: "Vehiculos" },
+];
+const currentPath = Astro.url.pathname;
+---
+<footer class="flex justify-center items-center fixed bottom-10 w-full">
+    <nav
+        class="bg-[#1E1F20] text-[#86878A] px-3 py-2 rounded-xl shadow-lg basis-1/2"
+    >
+        <div class="flex flex-row justify-center gap-10 items-center">
+            {
+                links.map((link) => (
+                    <a 
+                    href={link.href}
+                    class:list=
+                        {[
+                            'flex flex-col items-center gap-1 text-sm',
+                            {
+                                'text-[#2D816E]': currentPath === link.href
+                            },
+                        ]}
+                    style={
+                        currentPath === link.href
+                            ? 'filter: invert(42%) sepia(32%) saturate(747%) hue-rotate(120deg) brightness(90%) contrast(85%);'
+                            : ''
+                    }
+                    >
+                        <img src={link.icon} alt="" />
+                        <span>{link.label}</span>
+                    </a>
+                ))
+            }
+        </div>
+    </nav>
+</footer>

@@ -1,0 +1,17 @@
+[
+    {
+      "id": "1",
+      "model": "BMW 5 Series 520d",
+      "matriculation": "8937FYP",
+      "image": "8937FYP.png",
+      "kilometers": "263.500"
+    },
+    {
+        "id": "2",
+        "model": "Mercedes-Benz ML 350",
+        "matriculation": "9367HMJ",
+        "image": "9367HMJ.png",
+        "kilometers": "260.000"
+      }
+  ]
+  
