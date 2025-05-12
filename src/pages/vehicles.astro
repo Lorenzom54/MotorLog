@@ -1,12 +1,68 @@
 ---
+import VehicleCard from "../components/VehicleCard.astro";
 import MainLayout from "../layout/MainLayout.astro";
+import vehicles from "../data/vehicles.json";
+import VehicleForm from "../components/VehicleForm.astro";
+import BottomNav from "../components/BottomNav.astro";
 ---
 
 <MainLayout title="Vehiculos">
+    <h1 class="text-3xl text-white font-semibold p-2 px-9">Vehiculos</h1>
 
-    <div class="flex flex-col items-center justify-center h-screen text-white">
-        <h1 class="text-3xl font-bold">Vehicles</h1>
-        <p class="mt-4">This is the vehicles page.</p>
+    {
+        vehicles.map((vehicle) => (
+            <VehicleCard
+                image={vehicle.image}
+                model={vehicle.model}
+                matriculation={vehicle.matriculation}
+                kilometers={vehicle.kilometers}
+            />
+        ))
+    }
+
+    <div class="text-white px-9">
+        <div
+            x-data="{ showModal: false }"
+            class="flex items-center justify-center gap-5 bg-[#1E1F20] rounded-xl p-4 mb-4 shadow-lg"
+        >
+            <!-- Botón para abrir el modal -->
+            <button
+                class="bg-accent text-white rounded-xl font-semibold"
+                @click="showModal = true"
+            >
+                + Añadir vehículo
+            </button>
+
+            <!-- Fondo oscuro + modal -->
+            <!-- Capa oscura + blur -->
+            <div
+                x-show="showModal"
+                x-transition
+                class="fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-sm"
+            >
+                <!-- Panel -->
+                <div
+                    @click.outside="showModal = false"
+                    class="relative mt-20 w-[92%] max-w-md rounded-3xl bg-[#242425] text-gray-100 shadow-2xl ring-1 ring-white/10"
+                >
+                    <!-- Botón cerrar -->
+                    <button
+                        @click="showModal = false"
+                        class="absolute right-4 top-4 text-gray-400 hover:text-white text-2xl leading-none"
+                        aria-label="Cerrar"
+                    >
+                        &times;
+                    </button>
+
+                    <!-- CONTENIDO DEL MODAL -->
+                    <div
+                        class="px-6 pb-6 pt-14 space-y-8 overflow-y-auto max-h-[80vh]"
+                    >
+                        <VehicleForm />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+    <BottomNav />
 </MainLayout>

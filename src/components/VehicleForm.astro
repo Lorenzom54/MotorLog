@@ -1,0 +1,67 @@
+---
+import MainLayout from "../layout/MainLayout.astro";
+const { onSubmit } = Astro.props;
+---
+
+<MainLayout title="Añade un Vehiculo">
+    <form
+        class="bg-card p-4 rounded-xl shadow-card flex flex-col gap-4 text-sm text-white"
+        on:submit|preventDefault={(e: { target: HTMLFormElement | undefined; }) => {
+            const data = Object.fromEntries(new FormData(e.target));
+            onSubmit(data);
+        }}
+    >
+        <div>
+            <label for="name" class="block mb-1">Nombre del vehículo</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="bg-base border border-borderSoft rounded-lg px-3 py-2 w-full"
+            />
+        </div>
+
+        <div>
+            <label for="plate" class="block mb-1">Matrícula</label>
+            <input
+                id="plate"
+                name="plate"
+                type="text"
+                class="bg-base border border-borderSoft rounded-lg px-3 py-2 w-full"
+            />
+        </div>
+
+        <div>
+            <label for="image" class="block mb-1">Imagen</label>
+            <input
+                id="image"
+                name="image"
+                type="text"
+                class="bg-base border border-borderSoft rounded-lg px-3 py-2 w-full"
+            />
+        </div>
+
+        <div>
+            <label for="mileage" class="block mb-1">Kilometraje actual</label>
+            <input
+                id="mileage"
+                name="mileage"
+                type="number"
+                required
+                class="bg-base border border-borderSoft rounded-lg px-3 py-2 w-full"
+            />
+        </div>
+
+
+        <div class="flex justify-between mt-4">
+
+            <button
+                type="submit"
+                class="bg-accent text-white px-4 py-2 rounded-xl hover:bg-[#0e8c6f] transition"
+            >
+                Guardar
+            </button>
+        </div>
+    </form>
+</MainLayout>
